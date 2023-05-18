@@ -7,7 +7,7 @@
  */
 char *_read_line(void)
 {
-	char *line = NULL;
+	char *line = NULL, *final_line;
 	size_t size = BUFFER_SIZE;
 	ssize_t length;
 
@@ -33,5 +33,9 @@ char *_read_line(void)
 	/* Replace newline character with null terminator */
 	line[length - 1] = '\0';
 
-	return (line);
+	/*return (line);*/
+	/* To handle comments (#) */
+	final_line = _handle_comments(line);
+
+	return (final_line);
 }

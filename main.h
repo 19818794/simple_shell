@@ -75,6 +75,9 @@ char *_strcat(char *dest, char *src);
 int _atoi(char *s);
 void _ctrl_c_signal_handler(int signal __attribute__((unused)));
 
+/* Handle comments */
+char *_handle_comments(char *line);
+
 /* Handel environment*/
 size_t _list_len(const list_t *h);
 list_t *_get_node_at_index(list_t *head, unsigned int index);

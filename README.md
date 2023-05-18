@@ -38,6 +38,7 @@ All of the following files are programs written in C and shell:
 | `_getenv.c`           | retrieves the value of an environment variable given its name.
 | `_built_in.c`         | implements built-in functions.
 | `_cd_.c`              | changes the current directory of the process.
+| `_handle_comments.c`  | removes any comments from the prompt.
 
 # Examples
 
@@ -283,6 +284,20 @@ LC_ALL=en_US.UTF-8
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 `OLDPWD=/root/simple_shell`
 _=./shell_1_3
+```
+
+..* # comment:
+
+> $ pwd # current directory
+
+```
+/root/simple_shell
+```
+
+> $ # new block for ls command
+
+```
+$
 ```
 
 # Learning Objectives
