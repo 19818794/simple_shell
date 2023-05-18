@@ -87,6 +87,7 @@ int _cmd_type(char *cmd);
 /* Built_in functions */
 void _exit_(char **parse);
 void (*_get_function(char *cmd))(char **);
+void _env_(char **parse);
 
 /* Main functions */
 char *_read_line(void);

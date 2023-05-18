@@ -33,12 +33,13 @@ void _exit_(char **parse)
 void (*_get_function(char *cmd))(char **)
 {
 	builtin	bif[] = {
-		{"exit", _exit_}
+		{"exit", _exit_},
+		{"env", _env_}
 	};
 	int i = 0;
 
 	/* Iterate through the array of built-in functions */
-	while (i < 1)
+	while (i < 2)
 	{
 		/*
 		 * Check the given command it it matches the name of
@@ -50,4 +51,30 @@ void (*_get_function(char *cmd))(char **)
 	}
 
 	return (NULL);
+}
+
+/**
+ * _env_ - prints the current environment.
+ * @parse: the command to be checked, not used here.
+ *
+ * Return: void.
+ */
+void _env_(char **parse)
+{
+	int length = 0, i = 0;
+	char **ptr = parse, **ptr_env = environ;
+
+	while (ptr[length] != NULL)
+		length++;
+	if (length == 1)
+	{
+		while (ptr_env[i] != NULL)
+		{
+			_print(ptr_env[i]);
+			_print("\n");
+			i++;
+		}
+	}
+	else
+		_print("Command syntax: env\n");
 }
