@@ -13,6 +13,8 @@ int main(int ac __attribute__((unused)), char **av)
 {
 	char *prompt = "$ ", *line, **parse, *delimiter = " \t\r\n\a";
 
+	/*When Ctrl+C is pressed, C program doesn't terminate, return newline*/
+	signal(SIGINT, _ctrl_c_signal_handler);
 	/* Collect the name of the shell */
 	shell_name = av[0];
 	/* Global variable to handel exit of shell */

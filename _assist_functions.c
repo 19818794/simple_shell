@@ -60,3 +60,51 @@ char *_strcat(char *dest, char *src)
 
 	return (dest);
 }
+
+/**
+ * _atoi - converts a string to an integer.
+ * @s: string to convert.
+ *
+ * Return: the converted integer.
+ */
+int _atoi(char *s)
+{
+	int i = 0, result = 0, sign = 1;
+
+	/* Skip any leading non-digit characters */
+	while ((s[i] < '0' || s[i] > '9') && s[i] != 0)
+	{
+		/*If the first character is '-' set the sign multiplier to -1*/
+		if (s[0] == '-')
+			sign *= -1;
+		i++;
+	}
+	/* Convert the string to an integer */
+	while ((s[i] >= '0' && s[i] <= '9') && s[i] != 0)
+	{
+		result = result * 10 - (s[i] - '0');
+		i++;
+	}
+	/* Apply the sign multiplier to the final result */
+	sign *= -1;
+
+	/* Multiply the result by the sign multiplier */
+	return (result * sign);
+}
+
+/**
+ * _ctrl_c_signal_handler - handles the signal triggered by the use of CTRL-C.
+ * @signal: the signal number.
+ *
+ * Return: void
+ */
+void _ctrl_c_signal_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		/* Return to the console */
+		_print("\n$ ");
+		/* Clear the output buffer and move the buffered data to the console */
+		fflush(stdout);
+	}
+}

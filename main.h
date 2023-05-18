@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 /* Structures */
 /**
@@ -70,6 +71,8 @@ int _strncmp(const char *s1, const char *s2, int n);
 /* Assistance functions */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strcat(char *dest, char *src);
+int _atoi(char *s);
+void _ctrl_c_signal_handler(int signal __attribute__((unused)));
 
 /* Handel environment*/
 size_t _list_len(const list_t *h);

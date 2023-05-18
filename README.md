@@ -107,6 +107,37 @@ _=./shell_1_0
 Command syntax: env
 ```
 
+> $ exit hello world
+
+```
+Command syntax: exit [argument]
+```
+
+> $ exit -hello-
+
+```
+Error: exit function expected integer argument
+```
+
+> $ exit -98
+
+```
+Error: Illegal number
+```
+
+> $ ^C
+
+```
+$ 
+```
+
+> $ exit 98
+
+```
+root@????????????:~/simple_shell# echo $?
+98
+```
+
 # Learning Objectives
 
 Who designed and implemented the original Unix operating system

@@ -8,19 +8,45 @@
  */
 void _exit_(char **parse)
 {
-	int length = 0;
+	int length = 0, status = 0, i, check = 0;
 	char **ptr = parse;
 
 	while (ptr[length] != NULL)
 		length++;
-
 	if (length == 1)
 	{
 		should_run = 0;
-		exit(0);
+		exit(status);
+	}
+	else if (length == 2)
+	{
+		for (i = 0; ptr[1][i]; i++)
+		{
+			if (ptr[1][i] < 48 || ptr[1][i] > 57)
+			{
+				if (i > 0 || ptr[1][i] != 45)
+				{
+					check = 1;
+					break;
+				}
+			}
+		}
+		if (check == 1 || (_strlen(ptr[1]) == 1 && ptr[1][0] == 45))
+			_print("Error: exit function expected integer argument\n");
+		else
+		{
+			status = _atoi(ptr[1]);
+			if (status < 0)
+				_print("Error: Illegal number\n");
+			else
+			{
+				should_run = 0;
+				exit(status);
+			}
+		}
 	}
 	else
-		_print("Command syntax: exit\n");
+		_print("Command syntax: exit [argument]\n");
 }
 
 /**
