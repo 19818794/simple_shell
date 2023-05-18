@@ -9,34 +9,39 @@
 void _execute(char **parse)
 {
 	pid_t child_pid;
-	int res, status;
+	int res, status, cmd_type;
 
-	/* Create a new process */
-	child_pid = fork();
-	/* Error handling for failed fork */
-	if (child_pid == -1)
+	if (parse[0] != NULL)
 	{
-		perror("Error: fork()\n");
-		exit(EXIT_FAILURE);
-	}
-	else if (child_pid == 0)
-	{
-		/* Child process */
-		res = execve(parse[0], parse, NULL);
-		/* Error handling for failed execve */
-		if (res == -1)
+		cmd_type = _cmd_type(parse[0]);
+		if (cmd_type != INVALID_CMD)
 		{
-			if (_strcmp(parse[0], "\n") == 0)
-				_print("\n");
-			else
-				_print_err(parse[0]);
-			exit(EXIT_FAILURE);
+			child_pid = fork(); /* Create a new process */
+			if (child_pid == -1) /*Error handling for failed fork*/
+			{
+				perror("Error: fork()\n");
+				exit(EXIT_FAILURE);
+			}
+			else if (child_pid == 0) /* Child process */
+			{
+				if (cmd_type == EXTERNAL_CMD)
+					res = execve(parse[0], parse, NULL);
+				else if (cmd_type == PATH_CMD)
+					res = execve(_check_path(parse[0]),
+							parse, NULL);
+				if (res == -1) /*Error handling failed execve*/
+				{
+					if (_strcmp(parse[0], "\n") == 0)
+						_print("\n");
+					else
+						_print_err(parse[0]);
+					exit(EXIT_FAILURE);
+				}
+			}
+			else /* Parent process */
+				wait(&status); /*Waitfor childprocess to exit*/
 		}
-	}
-	else
-	{
-		/* Parent process */
-		/* Wait for child process to exit */
-		wait(&status);
+		else
+			_print_err(parse[0]);
 	}
 }

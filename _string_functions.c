@@ -96,6 +96,26 @@ int _strcmp(char *s1, char *s2)
 	 * otherwise if the characters at the current position of s1 and s2 are
 	 * different, return the difference between them.
 	 */
-
 	return (*s1 - *s2);
+}
+
+/**
+ * _strncmp - compares the first n characters of two strings s1 and s2.
+ * @s1: the first string.
+ * @s2: the second string.
+ * @n: the maximum number of characters to compare between the two strings.
+ *
+ * Return: an integer less than, equal to, or greater than zero if s1 is
+ * found, respectively, to be less than, to match, or be greater than s2.
+ */
+int _strncmp(const char *s1, const char *s2, int n)
+{
+	/* Compare characters until n is reached or mismatch is found */
+	while (n-- && *s1 != '\0' && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	/* return the difference between the first non-matching characters */
+	return ((n < 0) ? 0 : (*s1 - *s2));
 }

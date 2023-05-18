@@ -33,3 +33,30 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	return (ptr);
 }
+
+/**
+ * _strcat - concatenates two strings.
+ * @dest: the first string.
+ * @src: the second string.
+ *
+ * Return: a pointer to dest.
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ptr = dest;
+
+	/* Find the end of dest */
+	while (*ptr != '\0')
+		ptr++;
+	/* Copy the characters from src to dest */
+	while (*src != '\0')
+	{
+		*ptr = *src;
+		ptr++;
+		src++;
+	}
+	/* Add the null terminator to the end of the resulting string */
+	*ptr = '\0';
+
+	return (dest);
+}
