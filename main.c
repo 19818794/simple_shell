@@ -11,7 +11,7 @@
  */
 int main(int ac __attribute__((unused)), char **av)
 {
-	char *prompt = "$ ", *line, **parse, *delimiter = "\n";
+	char *prompt = "$ ", *line, **parse, *delimiter = " \t\r\n\a";
 
 	/* Collect the name of the shell */
 	shell_name = av[0];

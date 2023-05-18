@@ -38,7 +38,15 @@ All of the following files are programs written in C and shell:
 
 > $ /bin/pwd
 
-```/root/simple_shell```
+```
+/root/simple_shell
+```
+
+> $ /bin/echo "Hello World!"
+
+```
+"Hello World!"
+```
 
 # Learning Objectives
 
