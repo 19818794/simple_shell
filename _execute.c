@@ -10,17 +10,21 @@ void _execute(char **parse)
 {
 	pid_t child_pid;
 	int res, status, cmd_type;
+	void (*function)(char **cmd);
 
 	if (parse[0] != NULL)
 	{
 		cmd_type = _cmd_type(parse[0]);
-		if (cmd_type != INVALID_CMD)
+		if (cmd_type == INTERNAL_CMD)
+		{
+			function = _get_function(parse[0]), function(parse);
+		}
+		else if (cmd_type == EXTERNAL_CMD || cmd_type == PATH_CMD)
 		{
 			child_pid = fork(); /* Create a new process */
 			if (child_pid == -1) /*Error handling for failed fork*/
 			{
-				perror("Error: fork()\n");
-				exit(EXIT_FAILURE);
+				perror("Error: fork()\n"), exit(EXIT_FAILURE);
 			}
 			else if (child_pid == 0) /* Child process */
 			{

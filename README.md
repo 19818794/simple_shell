@@ -36,6 +36,7 @@ All of the following files are programs written in C and shell:
 | `_check_path.c`       | checks if a command exists in one of the directories in the PATH environment variable.
 | `_cmd_type.c`         | determines the type of a command.
 | `_getenv.c`           | retrieves the value of an environment variable given its name.
+| `_built_in.c`         | implements built-in functions.
 
 # Examples
 
@@ -66,6 +67,19 @@ drwxr-xr-x 1 root  root  62 May  4 09:02 ..
 drwx------ 2 mysql mysql  6 Mar 30  2022 tmp.DAOEzJT0J6
 drwx------ 2 mysql mysql  6 Mar 30  2022 tmp.dOKjikw0Ig
 drwx------ 2 root  root  22 Mar 30  2022 tmpztrs6ymg
+```
+> $ exit 98
+
+```
+Command syntax: exit
+```
+
+> $ exit
+
+```
+root@????????????:~/simple_shell# echo $?
+
+0
 ```
 
 # Learning Objectives

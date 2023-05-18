@@ -15,8 +15,10 @@ int main(int ac __attribute__((unused)), char **av)
 
 	/* Collect the name of the shell */
 	shell_name = av[0];
+	/* Global variable to handel exit of shell */
+	should_run = 1;
 	/* It displayed prompt again eachtime a command has been executed*/
-	while (1)
+	while (should_run != 0)
 	{
 		/* Display a prompt to wait for the user to type a command */
 		if (isatty(STDIN_FILENO))

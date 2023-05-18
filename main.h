@@ -19,7 +19,6 @@
 /**
  * struct list_s - singly linked list
  * @str: string - (malloc'ed string)
- * @len: length of the string
  * @next: points to the next node
  *
  * Description: singly linked list node structure
@@ -30,15 +29,30 @@ typedef struct list_s
 	struct list_s *next;
 } list_t;
 
+/**
+ * struct built_in_functions - type struct builtin.
+ * @cmd_name: the command's name.
+ * @function: the function that executes the corresponding command.
+ *
+ * Description: maps a command name to a function.
+ */
+typedef struct built_in_functions
+{
+	char *cmd_name;
+	void (*function)(char **parse);
+} builtin;
+
 /* Global variables */
 char *shell_name;
 extern char **environ;
+int should_run;
 
 /* Object_like macros */
 #define BUFFER_SIZE 1024
 #define INVALID_CMD -1
 #define EXTERNAL_CMD 1
 #define PATH_CMD 2
+#define INTERNAL_CMD 3
 
 /* Prototypes */
 /* Print a string */
@@ -69,6 +83,10 @@ ssize_t _getline_(char **line, size_t *size, FILE *stream);
 /* Handle the PATH */
 char *_check_path(char *cmd);
 int _cmd_type(char *cmd);
+
+/* Built_in functions */
+void _exit_(char **parse);
+void (*_get_function(char *cmd))(char **);
 
 /* Main functions */
 char *_read_line(void);
