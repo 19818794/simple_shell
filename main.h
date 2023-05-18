@@ -60,6 +60,7 @@ int should_run;
 int _putchar(char c);
 void _print(char *str);
 void _print_err(char *cmd);
+void _snprint(char *ptr, int size, char *s1, char *s2);
 
 /* String functions*/
 int _strlen(char *s);
@@ -91,6 +92,8 @@ int _cmd_type(char *cmd);
 void _exit_(char **parse);
 void (*_get_function(char *cmd))(char **);
 void _env_(char **parse);
+void _setenv_(char **parse);
+void _unsetenv_(char **parse);
 
 /* Main functions */
 char *_read_line(void);

@@ -50,3 +50,33 @@ void _print_err(char *cmd)
 	else
 		_print(": found\n");
 }
+
+/**
+ * _snprint - concatenate s1, followed by an equals sign ('='),
+ * followed by a portion of s2, into the ptr array.
+ * @ptr: a pointer to a character array.
+ * @size: the size allocated for ptr array.
+ * @s1: the first string.
+ * @s2: the second string.
+ *
+ * Return: void.
+ */
+void _snprint(char *ptr, int size, char *s1, char *s2)
+{
+	int i = 0, j = 0;
+
+	while (i < _strlen(s1))
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = '=';
+	i++;
+	while (i < size && j < _strlen(s2))
+	{
+		ptr[i] = s2[j];
+		i++;
+		j++;
+	}
+	ptr[i] = '\0';
+}

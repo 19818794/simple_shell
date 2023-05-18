@@ -11,7 +11,7 @@ int _cmd_type(char *cmd)
 {
 	char *path = NULL;
 	int i;
-	char *internal_cmd[] = {"exit", "env", NULL};
+	char *internal_cmd[] = {"exit", "env", "setenv", "unsetenv", NULL};
 
 	/* Check if the cmd is an internal command */
 	for (i = 0; internal_cmd[i] != NULL; i++)
