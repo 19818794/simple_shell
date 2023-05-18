@@ -83,6 +83,8 @@ char *_getenv(char *name);
 
 /* Advanced functions */
 ssize_t _getline_(char **line, size_t *size, FILE *stream);
+void _update_env(char *path);
+void _cd_(char **parse);
 
 /* Handle the PATH */
 char *_check_path(char *cmd);

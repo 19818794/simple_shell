@@ -62,12 +62,13 @@ void (*_get_function(char *cmd))(char **)
 		{"exit", _exit_},
 		{"env", _env_},
 		{"setenv", _setenv_},
-		{"unsetenv", _unsetenv_}
+		{"unsetenv", _unsetenv_},
+		{"cd", _cd_}
 	};
 	int i = 0;
 
 	/* Iterate through the array of built-in functions */
-	while (i < 4)
+	while (i < 5)
 	{
 		/*
 		 * Check the given command it it matches the name of
