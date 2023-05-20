@@ -39,8 +39,11 @@ All of the following files are programs written in C and shell:
 | `_built_in.c`         | implements built-in functions.
 | `_cd_.c`              | changes the current directory of the process.
 | `_handle_comments.c`  | removes any comments from the prompt.
+| `_print_error.c`      | prints the same error output as sh (/bin/sh).
 
 # Examples
+
+* **Version 0.1:**
 
 > $ /bin/pwd
 
@@ -48,11 +51,15 @@ All of the following files are programs written in C and shell:
 /root/simple_shell
 ```
 
+* **Verson 0.2:**
+
 > $ /bin/echo "Hello World!"
 
 ```
 "Hello World!"
 ```
+
+* **Version 0.3:**
 
 > $ pwd
 
@@ -70,6 +77,9 @@ drwx------ 2 mysql mysql  6 Mar 30  2022 tmp.DAOEzJT0J6
 drwx------ 2 mysql mysql  6 Mar 30  2022 tmp.dOKjikw0Ig
 drwx------ 2 root  root  22 Mar 30  2022 tmpztrs6ymg
 ```
+
+* **Version 0.4:**
+
 > $ exit 98
 
 ```
@@ -82,6 +92,8 @@ Command syntax: exit
 root@????????????:~/simple_shell# echo $?
 0
 ```
+
+* **Version 1.0:**
 
 > $ env
 
@@ -108,6 +120,8 @@ _=./shell_1_0
 ```
 Command syntax: env
 ```
+
+* **Version 1.1:**
 
 > $ exit hello world
 
@@ -140,8 +154,9 @@ root@????????????:~/simple_shell# echo $?
 98
 ```
 
-> $ setenv
+* **Version 1.2:**
 
+> $ setenv
 
 ```
 Command syntax: setenv VARIABLE VALUE
@@ -198,7 +213,7 @@ OLDPWD=/root
 _=./shell_1_2
 ```
 
-..* cd cammand:
+* **Version 1.3:**
 
 > $ env
 
@@ -286,7 +301,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 _=./shell_1_3
 ```
 
-..* # comment:
+* **Version 1.4:**
 
 > $ pwd # current directory
 
@@ -298,6 +313,26 @@ _=./shell_1_3
 
 ```
 $
+```
+
+* **Version 2.0:**
+
+> $ ls /var ; ls /hbtn ; /bin/pwd ; unsetenv ; echo hello world ; setenv shell ; exit hello world ; exit -hello- ; exit -98 ; env hello ; cd hello world ; exit 98
+
+```
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+ls: cannot access '/hbtn': No such file or directory
+/root/simple_shell
+Command syntax: unsetenv VARIABLE
+hello world
+Command syntax: setenv VARIABLE VALUE
+./shell_2_0: 7: exit: Illegal number: hello
+./shell_2_0: 8: exit: Illegal number: -hello-
+./shell_2_0: 9: exit: Illegal number: -98
+env: 'hello': No such file or directory
+./shell_2_0: 11: cd: can't cd to hello
+root@????????????:~/simple_shell# echo $?
+98
 ```
 
 # Learning Objectives

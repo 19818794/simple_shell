@@ -33,17 +33,20 @@ int _putchar(char c)
 }
 
 /**
- * _print_err - gets the status of a file.
+ * _perror - gets the status of a file.
  * @cmd: the file to be checked.
  *
  * Return: void.
  */
-void _print_err(char *cmd)
+void _perror(char *cmd)
 {
 	struct stat st;
+	char *ptr = int_to_str(cmd_counter);
 
 	_print(shell_name);
-	_print(": 1: ");
+	_print(": ");
+	_print(ptr);
+	_print(": ");
 	_print(cmd);
 	if (stat(cmd, &st) != 0)
 		_print(": not found\n");

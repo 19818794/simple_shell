@@ -38,7 +38,7 @@ void _execute(char **parse)
 					if (_strcmp(parse[0], "\n") == 0)
 						_print("\n");
 					else
-						_print_err(parse[0]);
+						_perror(parse[0]);
 					exit(EXIT_FAILURE);
 				}
 			}
@@ -46,6 +46,6 @@ void _execute(char **parse)
 				wait(&status); /*Waitfor childprocess to exit*/
 		}
 		else
-			_print_err(parse[0]);
+			_perror(parse[0]);
 	}
 }

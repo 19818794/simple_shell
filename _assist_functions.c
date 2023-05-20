@@ -108,3 +108,49 @@ void _ctrl_c_signal_handler(int signal)
 		fflush(stdout);
 	}
 }
+/**
+ * int_to_str - converts an integer to a string.
+ * @num: the integer to be converted.
+ *
+ * Return: string format after conversion.
+ */
+char *int_to_str(int num)
+{
+	int is_negative = 0, tmp = num, digits = 0, i;
+	char *str;
+
+	/* Check if the number is negative */
+	if (num < 0)
+	{
+		is_negative = 1;
+		num *= -1;
+	}
+	/* Count the number of digits in the number */
+	while (tmp > 0)
+	{
+		digits++;
+		tmp /= 10;
+	}
+	/* Special case for zero, it has 1 digit */
+	if (num == 0)
+		digits = 1;
+	/* Increase the digit count if the number is negative */
+	if (is_negative)
+		digits++;
+	/* Allocate memory for the string representation of the number */
+	str = malloc(sizeof(char) * (digits + 1));
+	if (str == NULL)
+		return (NULL);
+	/* Set the null-terminator at the end of the string */
+	str[digits] = '\0';
+	/*If num is negative set minus sign at the beginning of the string*/
+	if (is_negative)
+		str[0] = '-';
+	/*Convert each digit of num to a character and store it in the string*/
+	for (i = digits - 1; i >= is_negative; i--)
+	{
+		str[i] = num % 10 + '0';
+		num /= 10;
+	}
+	return (str);
+}

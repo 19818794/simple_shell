@@ -32,12 +32,12 @@ void _exit_(char **parse)
 			}
 		}
 		if (check == 1 || (_strlen(ptr[1]) == 1 && ptr[1][0] == 45))
-			_print("Error: exit function expected integer argument\n");
+			_exit_error(ptr[1]);
 		else
 		{
 			status = _atoi(ptr[1]);
 			if (status < 0)
-				_print("Error: Illegal number\n");
+				_exit_error(ptr[1]);
 			else
 			{
 				should_run = 0;
@@ -46,7 +46,7 @@ void _exit_(char **parse)
 		}
 	}
 	else
-		_print("Command syntax: exit [argument]\n");
+		_exit_error(ptr[1]);
 }
 
 /**
@@ -91,7 +91,7 @@ void (*_get_function(char *cmd))(char **)
 void _env_(char **parse)
 {
 	int length = 0, i = 0;
-	char **ptr = parse, **ptr_env = environ;
+	char **ptr = parse, **ptr_env = environ, *msg;
 
 	while (ptr[length] != NULL)
 		length++;
@@ -105,7 +105,11 @@ void _env_(char **parse)
 		}
 	}
 	else
-		_print("Command syntax: env\n");
+	{
+		msg = _env_error(ptr[1]);
+		if (access(msg, F_OK) == -1)
+			perror(msg);
+	}
 }
 
 /**

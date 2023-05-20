@@ -47,6 +47,7 @@ typedef struct built_in_functions
 char *shell_name;
 extern char **environ;
 int should_run;
+int cmd_counter;
 
 /* Object_like macros */
 #define BUFFER_SIZE 1024
@@ -59,7 +60,7 @@ int should_run;
 /* Print a string */
 int _putchar(char c);
 void _print(char *str);
-void _print_err(char *cmd);
+void _perror(char *cmd);
 void _snprint(char *ptr, int size, char *s1, char *s2);
 
 /* String functions*/
@@ -74,6 +75,12 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_strcat(char *dest, char *src);
 int _atoi(char *s);
 void _ctrl_c_signal_handler(int signal __attribute__((unused)));
+char *int_to_str(int num);
+
+/* Handle errors*/
+void _exit_error(char *status);
+char *_env_error(char *ptr);
+void _cd_error(char *arg);
 
 /* Handle comments */
 char *_handle_comments(char *line);

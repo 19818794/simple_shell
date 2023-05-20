@@ -24,12 +24,12 @@ void _cd_(char **parse)
 			path = parse[1]; /* cd [DIRECTORY] */
 	}
 	else
-		_print("Command syntax: cd [DIRECTORY]\n");
+		_cd_error(parse[1]);
 	if (len_parse <= 2)
 	{
 		res = chdir(path);
 		if (res != 0)
-			perror("Error: chdir()\n");
+			_cd_error(parse[1]);
 		/*Update the environment variables when directory was changed*/
 		_update_env(path);
 	}
