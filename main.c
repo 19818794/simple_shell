@@ -11,9 +11,8 @@
  */
 int main(int ac __attribute__((unused)), char **av)
 {
-	char *prompt = "$ ", *line, **parse, *delimiter = " \t\r\n\a",
-	     *operator = ";", **parsed_line;
-	int i;
+	char *prompt = "$ ", *line, *operator = ";", **parsed_line;
+	int i, valid;
 
 	/*When Ctrl+C is pressed, C program doesn't terminate, return newline*/
 	signal(SIGINT, _ctrl_c_signal_handler);
@@ -39,16 +38,17 @@ int main(int ac __attribute__((unused)), char **av)
 		i = 0;
 		while (parsed_line[i] != NULL)
 		{
-			/* Split input line into individual cmds and args */
-			parse = _split_line(parsed_line[i], delimiter);
-			/* Execute the parsed command */
-			_execute(parse);
-			free(parse); /* Free the memory allocated */
-			i++, cmd_counter++; /* Next command */
+			valid = _handle_logical_operators(parsed_line[i]);
+			if (valid == -1)
+			{
+				_print("Invalid command: Cannot have both '&&' and '||' operators\n");
+				break;
+			}
+			i++;
 		}
 		free(line), free(parsed_line); /* Free the memory allocated */
 	}
 	/* Free the memory allocated */
-	free(prompt), free(delimiter), free(operator);
+/*	free(prompt), free(operator);*/
 	return (0);
 }

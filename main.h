@@ -48,6 +48,7 @@ char *shell_name;
 extern char **environ;
 int should_run;
 int cmd_counter;
+int logical_counter;
 
 /* Object_like macros */
 #define BUFFER_SIZE 1024
@@ -69,10 +70,11 @@ char *_strcpy(char *dest, char *src);
 char *_strdup(char *line);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
+char *_strcat(char *dest, char *src);
+char *_strstr(char *line, char *str);
 
 /* Assistance functions */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char *_strcat(char *dest, char *src);
 int _atoi(char *s);
 void _ctrl_c_signal_handler(int signal __attribute__((unused)));
 char *int_to_str(int num);
@@ -110,6 +112,8 @@ void _unsetenv_(char **parse);
 /* Main functions */
 char *_read_line(void);
 char **_split_line(char *line, char *delimiter);
+void _execute_ext_path_cmds(char **parse, int cmd_type);
 void _execute(char **parse);
+int _handle_logical_operators(char *line);
 
 #endif

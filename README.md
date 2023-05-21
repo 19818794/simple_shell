@@ -40,6 +40,9 @@ All of the following files are programs written in C and shell:
 | `_cd_.c`              | changes the current directory of the process.
 | `_handle_comments.c`  | removes any comments from the prompt.
 | `_print_error.c`      | prints the same error output as sh (/bin/sh).
+| `_string_functions_2.c`       | contains all not allowed string library functions (continue).
+| `_handle_logical_operators.c` | handles the && and || shell logical operators.
+| `_execute_ext_path_cmds.c`    | executes external or path cmds in the shell.
 
 # Examples
 
@@ -333,6 +336,39 @@ env: 'hello': No such file or directory
 ./shell_2_0: 11: cd: can't cd to hello
 root@????????????:~/simple_shell# echo $?
 98
+```
+
+* **Version 2.1:**
+
+> $ setenv || exit hello || /bin/ls /hbtn || pwd || ls /var
+
+```
+Command syntax: setenv VARIABLE VALUE
+./shell_10: 3: exit: Illegal number: hello
+/bin/ls: cannot access '/hbtn': No such file or directory
+/root/simple_shell
+```
+
+> $ pwd && /bin/ls /var && echo hello world! && unsetenv && env hello
+
+```
+/root/simple_shell
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+hello world!
+Command syntax: unsetenv VARIABLE
+```
+
+> setenv || exit hello || /bin/ls /hbtn || pwd || ls /var ; pwd && /bin/ls /var && echo hello world! && unsetenv && env hello
+
+```
+Command syntax: setenv VARIABLE VALUE
+./shell_10: 3: exit: Illegal number: hello
+/bin/ls: cannot access '/hbtn': No such file or directory
+/root/simple_shell
+/root/simple_shell
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+hello world!
+Command syntax: unsetenv VARIABLE
 ```
 
 # Learning Objectives

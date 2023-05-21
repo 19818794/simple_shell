@@ -14,10 +14,7 @@ void _exit_(char **parse)
 	while (ptr[length] != NULL)
 		length++;
 	if (length == 1)
-	{
-		should_run = 0;
-		exit(status);
-	}
+		logical_counter = 0, should_run = 0, exit(status);
 	else if (length == 2)
 	{
 		for (i = 0; ptr[1][i]; i++)
@@ -32,21 +29,21 @@ void _exit_(char **parse)
 			}
 		}
 		if (check == 1 || (_strlen(ptr[1]) == 1 && ptr[1][0] == 45))
-			_exit_error(ptr[1]);
+			logical_counter = 1, _exit_error(ptr[1]);
 		else
 		{
 			status = _atoi(ptr[1]);
 			if (status < 0)
-				_exit_error(ptr[1]);
+				logical_counter = 1, _exit_error(ptr[1]);
 			else
 			{
-				should_run = 0;
+				logical_counter = 0, should_run = 0;
 				exit(status);
 			}
 		}
 	}
 	else
-		_exit_error(ptr[1]);
+		logical_counter = 1, _exit_error(ptr[1]);
 }
 
 /**
@@ -103,9 +100,11 @@ void _env_(char **parse)
 			_print("\n");
 			i++;
 		}
+		logical_counter = 0; /* Command succeeds */
 	}
 	else
 	{
+		logical_counter = 1; /* Command fails */
 		msg = _env_error(ptr[1]);
 		if (access(msg, F_OK) == -1)
 			perror(msg);
@@ -126,7 +125,10 @@ void _setenv_(char **parse)
 	while (parse[len_parse] != NULL)
 		len_parse++;
 	if (len_parse != 3)
+	{
+		logical_counter = 1; /* Command fails */
 		_print("Command syntax: setenv VARIABLE VALUE\n");
+	}
 	else
 	{
 		len_name = _strlen(parse[1]);
@@ -153,6 +155,7 @@ void _setenv_(char **parse)
 			_snprint(new_env[i], len_new_line, parse[1], parse[2]);
 			new_env[i + 1] = NULL;
 		}
+		logical_counter = 0; /* Command succeeds */
 	}
 }
 
@@ -170,6 +173,7 @@ void _unsetenv_(char **parse)
 	while (ptr[len_parse] != NULL)
 		len_parse++;
 	if (len_parse != 2)
+		logical_counter = 1,
 		_print("Command syntax: unsetenv VARIABLE\n");
 	else
 	{
@@ -177,10 +181,8 @@ void _unsetenv_(char **parse)
 		for (i = 0; env[i] != NULL; i++, count = 0)
 		{
 			for (j = 0; parse[1][j] != '\0' && j < len_var; j++)
-			{
 				if (parse[1][j] == env[i][j])
 					count++;
-			}
 			if (len_var == count)
 				break;
 		}
@@ -197,11 +199,11 @@ void _unsetenv_(char **parse)
 				for (l = 0; env[k + 1][l] != '\0'; l++)
 					env[k][l] = env[k + 1][l];
 			}
-			free(env[k]);
-			env[k] = NULL;
-			free(env[k + 1]);
+			free(env[k]), env[k] = NULL, free(env[k + 1]),
+				logical_counter = 0; /* Command succeeds */
 		}
 		else
+			logical_counter = 1,
 			_print("Error: VARIABLE not found\n");
 	}
 }
