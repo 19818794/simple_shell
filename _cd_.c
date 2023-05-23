@@ -26,6 +26,7 @@ void _cd_(char **parse)
 	else
 	{
 		logical_counter = 1; /* Command fails */
+		exit_status = 2;
 		_cd_error(parse[1]);
 	}
 	if (len_parse <= 2)
@@ -34,6 +35,7 @@ void _cd_(char **parse)
 		if (res != 0)
 		{
 			logical_counter = 1; /* Command fails */
+			exit_status = 2;
 			_cd_error(parse[1]);
 		}
 		logical_counter = 0; /* Command succeeds */

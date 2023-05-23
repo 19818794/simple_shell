@@ -43,6 +43,9 @@ All of the following files are programs written in C and shell:
 | `_string_functions_2.c`       | contains all not allowed string library functions (continue).
 | `_handle_logical_operators.c` | handles the && and || shell logical operators.
 | `_execute_ext_path_cmds.c`    | executes external or path cmds in the shell.
+| `_handle_dollar_qst_mark_var_rep.c` | handles dollar and question mark variables replacement.
+| `_handle_env_var_replacement.c`     | handles environment variable replacement.
+| `_handle_var_replacement.c`         | handles variables replacement.
 
 # Examples
 
@@ -369,6 +372,39 @@ Command syntax: setenv VARIABLE VALUE
 backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
 hello world!
 Command syntax: unsetenv VARIABLE
+```
+
+* **Version 2.2:**
+
+> $ cd /hello ; echo Hello Daddy$$ppid, I now have experience with$OLDPWD and$?points for every question mark $
+
+```
+./shell_2_2: 1: cd: can't cd to /hello
+Hello Daddy25903ppid, I now have experience with/root/simple_shell and2points for every question mark $ 
+```
+
+> $ unsetenv ; echo $? ; setenv ; /bin/echo $? ; env hello ; echo $? ; hello ; echo $?
+
+```
+Command syntax: unsetenv VARIABLE
+127 
+Command syntax: setenv VARIABLE VALUE
+127 
+env: 'hello': No such file or directory
+127 
+./shell_2_2: 17: hello: not found
+127 
+```
+
+> $ exit hello ; echo $? ; ls /hello ; echo $? ; /bin/ls /world ; echo $?
+
+```
+./shell_2_2: 21: exit: Illegal number: hello
+2 
+ls: cannot access '/hello': No such file or directory
+2 
+/bin/ls: cannot access '/world': No such file or directory
+2
 ```
 
 # Learning Objectives

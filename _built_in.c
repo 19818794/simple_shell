@@ -29,12 +29,14 @@ void _exit_(char **parse)
 			}
 		}
 		if (check == 1 || (_strlen(ptr[1]) == 1 && ptr[1][0] == 45))
-			logical_counter = 1, _exit_error(ptr[1]);
+			logical_counter = 1, exit_status = 2,
+			_exit_error(ptr[1]);
 		else
 		{
 			status = _atoi(ptr[1]);
 			if (status < 0)
-				logical_counter = 1, _exit_error(ptr[1]);
+				logical_counter = 1, exit_status = 2,
+				_exit_error(ptr[1]);
 			else
 			{
 				logical_counter = 0, should_run = 0;
@@ -43,7 +45,7 @@ void _exit_(char **parse)
 		}
 	}
 	else
-		logical_counter = 1, _exit_error(ptr[1]);
+		logical_counter = 1, exit_status = 2, _exit_error(ptr[1]);
 }
 
 /**
@@ -105,6 +107,7 @@ void _env_(char **parse)
 	else
 	{
 		logical_counter = 1; /* Command fails */
+		exit_status = 127;
 		msg = _env_error(ptr[1]);
 		if (access(msg, F_OK) == -1)
 			perror(msg);
@@ -128,6 +131,7 @@ void _setenv_(char **parse)
 	{
 		logical_counter = 1; /* Command fails */
 		_print("Command syntax: setenv VARIABLE VALUE\n");
+		exit_status = 127;
 	}
 	else
 	{
@@ -168,13 +172,13 @@ void _setenv_(char **parse)
 void _unsetenv_(char **parse)
 {
 	char **ptr = parse, **env = environ;
-	int len_parse = 0, len_var, i, j, count = 0, k, l, m;
+	int len_parse, len_var, i, j, count = 0, k, l, m;
 
-	while (ptr[len_parse] != NULL)
-		len_parse++;
+	len_parse = _ptrlen(ptr);
 	if (len_parse != 2)
 		logical_counter = 1,
-		_print("Command syntax: unsetenv VARIABLE\n");
+		_print("Command syntax: unsetenv VARIABLE\n"),
+		exit_status = 127;
 	else
 	{
 		len_var = _strlen(parse[1]);
@@ -200,10 +204,11 @@ void _unsetenv_(char **parse)
 					env[k][l] = env[k + 1][l];
 			}
 			free(env[k]), env[k] = NULL, free(env[k + 1]),
-				logical_counter = 0; /* Command succeeds */
+			logical_counter = 0; /* Command succeeds */
 		}
 		else
 			logical_counter = 1,
-			_print("Error: VARIABLE not found\n");
+			_print("Error: VARIABLE not found\n"),
+			exit_status = 127;
 	}
 }

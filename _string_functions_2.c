@@ -67,3 +67,19 @@ char *_strstr(char *line, char *str)
 	/* Operator not found */
 	return (NULL);
 }
+
+/**
+ * _ptrlen - calculates the length of pointer of a pointer.
+ * @ptr: pointer of a pointer.
+ *
+ * Return: The length of the pointer.
+ */
+int _ptrlen(char **ptr)
+{
+	int len_ptr = 0;
+
+	while (ptr[len_ptr] != NULL)
+                len_ptr++;
+
+	return (len_ptr);
+}

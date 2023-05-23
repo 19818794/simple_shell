@@ -49,6 +49,7 @@ extern char **environ;
 int should_run;
 int cmd_counter;
 int logical_counter;
+int exit_status;
 
 /* Object_like macros */
 #define BUFFER_SIZE 1024
@@ -72,6 +73,7 @@ int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
 char *_strcat(char *dest, char *src);
 char *_strstr(char *line, char *str);
+int _ptrlen(char **ptr);
 
 /* Assistance functions */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
@@ -108,6 +110,11 @@ void (*_get_function(char *cmd))(char **);
 void _env_(char **parse);
 void _setenv_(char **parse);
 void _unsetenv_(char **parse);
+
+/* Handle variables replacement */
+void _handle_dollar_qst_mark_var_rep(char *parse, char *after, int pos);
+void _handle_env_var_replacement(char *parse, int pos, char *after);
+void _handle_var_replacement(char **parse);
 
 /* Main functions */
 char *_read_line(void);

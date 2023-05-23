@@ -9,7 +9,7 @@
 void _execute(char **parse)
 {
 	pid_t child_pid;
-	int status, cmd_type, exit_status;
+	int status, cmd_type;
 	void (*function)(char **cmd);
 
 	if (parse[0] != NULL)
@@ -40,7 +40,8 @@ void _execute(char **parse)
 			}
 		}
 		else
-			logical_counter = 1, _perror(parse[0]);
+			logical_counter = 1, _perror(parse[0]),
+			exit_status = 127;
 		cmd_counter++; /* Next command */
 	}
 	else

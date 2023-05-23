@@ -11,6 +11,7 @@ void _execute_ext_path_cmds(char **parse, int cmd_type)
 {
 	int res;
 
+	_handle_var_replacement(parse);
 	if (cmd_type == EXTERNAL_CMD)
 		res = execve(parse[0], parse, NULL);
 	else if (cmd_type == PATH_CMD)
