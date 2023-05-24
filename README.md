@@ -22,7 +22,7 @@ All of the following files are programs written in C and shell:
 
 | Filename              | Description
 | --------------------- | ------------------------------------------------------------------------------------------------------- 
-| `main.c`              | creates a simple UNIX command interpreter.
+| `main.c`              | checks whether our shell has been invoked.
 | `main.h`              | header file includes libraries, structures, and the prototypes of all functions used for this  project.
 | `_prompt.c`           | reads a line from standard input.
 | `_split_line.c`       | splits line to array of words.
@@ -46,6 +46,8 @@ All of the following files are programs written in C and shell:
 | `_handle_dollar_qst_mark_var_rep.c` | handles dollar and question mark variables replacement.
 | `_handle_env_var_replacement.c`     | handles environment variable replacement.
 | `_handle_var_replacement.c`         | handles variables replacement.
+| `interactive_mode.c`                | creates a simple UNIX command interpreter for interactive mode.
+| `no_interactive_mode.c`             | creates a simple UNIX command interpreter for no interactive mode.
 
 # Examples
 
@@ -405,6 +407,23 @@ ls: cannot access '/hello': No such file or directory
 2 
 /bin/ls: cannot access '/world': No such file or directory
 2
+```
+
+* **Version 2.3:**
+
+> root@????????????:~/simple_shell# echo "ls /var
+<br/>> /bin/ls /var
+<br/>> setenv
+<br/>> unsetenv
+<br/>> env hello" | ./shell_2_3
+
+```
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+Command syntax: setenv VARIABLE VALUE
+Command syntax: unsetenv VARIABLE
+env: 'hello': No such file or directory
+root@????????????:~/simple_shell# 
 ```
 
 # Learning Objectives

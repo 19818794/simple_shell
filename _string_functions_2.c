@@ -79,7 +79,7 @@ int _ptrlen(char **ptr)
 	int len_ptr = 0;
 
 	while (ptr[len_ptr] != NULL)
-                len_ptr++;
+		len_ptr++;
 
 	return (len_ptr);
 }

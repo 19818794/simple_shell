@@ -116,11 +116,18 @@ void _handle_dollar_qst_mark_var_rep(char *parse, char *after, int pos);
 void _handle_env_var_replacement(char *parse, int pos, char *after);
 void _handle_var_replacement(char **parse);
 
-/* Main functions */
+/* Interactive functions */
 char *_read_line(void);
 char **_split_line(char *line, char *delimiter);
 void _execute_ext_path_cmds(char **parse, int cmd_type);
 void _execute(char **parse);
 int _handle_logical_operators(char *line);
+
+/* No-interactive functions */
+char *_read_stream(void);
+
+/* Main functions */
+int interactive_mode(void);
+int no_interactive_mode(void);
 
 #endif
